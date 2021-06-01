@@ -20,7 +20,6 @@ class PseudoBlock {
             Difficulty: ${this.difficulty}
             Data      : ${this.data}`;
     }
-    
     static genesis() {
         return new this('Genesis Timestamp', '-----', 'f1r57-h45h', [], 0, DIFFICULTY);
     }
