@@ -1,4 +1,4 @@
-const PseudoBlock = require('./blockchain/pseudo_block');
+const Wallet = require("./wallet");
+const wallet = new Wallet();
 
-const newBlock = PseudoBlock.minePseudoBlock(PseudoBlock.genesis(), 'newBlock');
-console.log(newBlock.toString());
+console.log(wallet.toString());

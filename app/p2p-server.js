@@ -34,7 +34,7 @@ class P2pServer {
         
         this.messageHandler(socket);
 
-        socket.send(JSON.stringify(this.blockchain));
+        this.sendChain(socket);
     }
 
     messageHandler(socket) {
@@ -45,10 +45,13 @@ class P2pServer {
         });
     }
 
-    syncChains() {
-        this.sockets.forEach(socket => {
+    sendChain(socket) {
+        socket.send(JSON.stringify(this.blockchain.chain));
+    }
 
-        });
+    syncChains() {
+        this.sockets.forEach(socket => 
+            this.sendChain(socket));
     }
 }
 

@@ -3,6 +3,7 @@ const PseudoBlock = require("./pseudo_block");
 
 describe('Blockchain', () => {
     let bc, bc2;
+    
     beforeEach(() => {
         bc = new Blockchain();
         bc2 = new Blockchain();

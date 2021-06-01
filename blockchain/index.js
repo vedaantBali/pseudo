@@ -27,7 +27,7 @@ class Blockchain {
     }
 
     replaceChain(newChain) {
-        if(newChain.length <= this.chain.length) {
+        if(newChain.length < this.chain.length) {
             console.log('Received chain is shorter than current chain');
             return;
         } else if(!this.isChainValid(newChain)) {
