@@ -20,7 +20,7 @@ describe('Transaction', () => {
         expect(transaction.outputs.find(output => output.address === receiver).amount)
         .toEqual(amount); 
     });
-
+    
     it('inputs the balance of the wallet', () => {
         expect(transaction.input.amount).toEqual(wallet.balance);
     });
