@@ -1,3 +1,4 @@
+// class declaration for the wallet - end point
 const ChainUtil = require('../chain-util');
 const { INITIAL_BALANCE } = require('../config');
 

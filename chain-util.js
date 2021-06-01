@@ -1,3 +1,4 @@
+// utility functions for hashing, id generation, key pair generation
 const EC = require('elliptic').ec;
 const SHA256 = require('crypto-js/sha256');
 const { v1 : uuidv1 } = require('uuid');

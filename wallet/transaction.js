@@ -1,3 +1,4 @@
+// class declaration for a transaction (model)
 const ChainUtil = require("../chain-util");
 
 class Transaction {

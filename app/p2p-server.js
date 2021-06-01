@@ -1,8 +1,10 @@
+// exposes websocket to listen for connections
 const Websocket = require('ws');
 
 const P2P_PORT = process.env.P2P_PORT || 5001;
 const peers = process.env.PEERS ? process.env.PEERS.split(',') : [];
 
+// server
 class P2pServer {
     constructor(blockchain) {
         this.blockchain = blockchain;

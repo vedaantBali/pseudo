@@ -1,3 +1,4 @@
+// test cases for blockchain
 const Blockchain = require("./index");
 const PseudoBlock = require("./pseudo_block");
 

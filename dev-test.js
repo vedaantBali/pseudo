@@ -1,3 +1,4 @@
+// dev test
 const Wallet = require("./wallet");
 const wallet = new Wallet();
 

@@ -1,3 +1,4 @@
+// class declaration for the blockchain
 const PseudoBlock = require("./pseudo_block");
 
 class Blockchain {
