@@ -1,6 +1,7 @@
 // exposes websocket to listen for connections
 const Websocket = require('ws');
 
+//declarations and initializations
 const P2P_PORT = process.env.P2P_PORT || 5001;
 const peers = process.env.PEERS ? process.env.PEERS.split(',') : [];
 const MESSAGE_TYPES = {
@@ -16,6 +17,7 @@ class P2pServer {
         this.sockets = [];
     }
 
+    // sets up local server on localhost default port 5001 or user defined port
     listen() {
         const server = new Websocket.Server({
             port: P2P_PORT
@@ -27,6 +29,7 @@ class P2pServer {
         console.log(`Listening for peers on port ${P2P_PORT}`);
     }
 
+    // open socket for clients to connect
     connectToPeers() {
         peers.forEach(peer => {
             /// ws://localhost:5001
@@ -35,6 +38,7 @@ class P2pServer {
         });
     }
  
+    // on client connections
     connectSocket(socket) {
         this.sockets.push(socket);
         console.log('Socket connected.');
@@ -44,6 +48,7 @@ class P2pServer {
         this.sendChain(socket);
     }
 
+    // 1. update chain 2. update transaction 3. clear transaction
     messageHandler(socket) {
         socket.on('message', message => {
             const data = JSON.parse(message);
@@ -63,6 +68,7 @@ class P2pServer {
         });
     }
 
+    // methods to update/sync or send transactions
     sendChain(socket) {
         socket.send(JSON.stringify({ 
             type: MESSAGE_TYPES.chain, 
@@ -82,11 +88,13 @@ class P2pServer {
         }));
     }
 
+    // broadcast new transactions to all clients to mine
     broadcastTransaction(transaction) {
         this.sockets.forEach(socket => 
             this.sendTransaction(socket, transaction));
     }
 
+    // broadcast to all clients that all transactions are verified
     broadcastClearTransactions() {
         this.sockets.forEach(socket => socket.send(JSON.stringify({
             type: MESSAGE_TYPES.clear_transactions

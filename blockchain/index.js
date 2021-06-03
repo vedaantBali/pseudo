@@ -6,6 +6,7 @@ class Blockchain {
         this.chain = [PseudoBlock.genesis()];
     }
 
+    // adds a block of transactions to current blockchain
     addBlock(data) {
         const pseudoBlock = PseudoBlock.minePseudoBlock(this.chain[this.chain.length-1], data);
         this.chain.push(pseudoBlock);
@@ -13,6 +14,7 @@ class Blockchain {
         return pseudoBlock;
     }
 
+    // checks if the current blockchain is valid or not and returns boolean result
     isChainValid(chain) {
         if(JSON.stringify(chain[0]) !== JSON.stringify(PseudoBlock.genesis())) return false;
         for(let i = 1; i<chain.length; i++) {
@@ -27,6 +29,7 @@ class Blockchain {
         return true;
     }
 
+    // method to replace current chain with new blockchain
     replaceChain(newChain) {
         if(newChain.length < this.chain.length) {
             console.log('Received chain is shorter than current chain');

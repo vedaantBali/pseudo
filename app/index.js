@@ -13,6 +13,7 @@ const Miner = require('./miner');
 // default port declaration
 const HTTP_PORT = process.env.HTTP_PORT || 3001;
 
+// initializing all vairables
 const app = express();
 const blockchain = new Blockchain();
 const wallet = new Wallet();
@@ -27,6 +28,7 @@ app.get('/blocks', (req, res) => {
     res.json(blockchain.chain);
 });
 
+// TODO / endpoint for home
 
 // mining end point - data added to chain
 app.post('/mine', (req, res) => {
@@ -51,6 +53,7 @@ app.post('/transact', (req, res) => {
     res.redirect('/transactions');
 });
 
+// mine-transactions end point to mine and get reward
 app.get('/mine-transactions', (req, res) => {
     const block = miner.mine();
     console.log(`New block added: ${block.toString()}`);

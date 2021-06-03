@@ -12,6 +12,7 @@ class PseudoBlock {
         this.difficulty = difficulty || DIFFICULTY;
     }
 
+    // returns string format of each block
     toString() {
         return `Block - 
             Timestamp : ${this.timestamp}
@@ -21,10 +22,14 @@ class PseudoBlock {
             Difficulty: ${this.difficulty}
             Data      : ${this.data}`;
     }
+
+    // GENESIS DECLARATION
+    // nAn timestamp, prevHash, hash, data, nonce, difficulty
     static genesis() {
         return new this('Genesis Timestamp', '-----', 'f1r57-h45h', [], 0, DIFFICULTY);
     }
     
+    // method to mine a block, and adjust its difficulty by tuning nonce value
     static minePseudoBlock(prevBlock, data) {
         let hash, timestamp;
         const prevHash = prevBlock.hash;
@@ -40,15 +45,19 @@ class PseudoBlock {
         return new this(timestamp, prevHash, hash, data, nonce, difficulty);
     }
     
+    // returns 256 bit SHA256 hash which takes following arguments as input
     static hash(timestamp, prevHash, data, nonce, difficulty) {
         return ChainUtil.hash(`${timestamp}${prevHash}${data}${nonce}${difficulty}`).toString();
     }
 
+    // returns hash value of the block according to the parameters
     static blockHash(block) {
         const {timestamp, prevHash, data, nonce, difficulty} = block;
         return PseudoBlock.hash(timestamp, prevHash, data, nonce, difficulty);
     }
 
+    // method to adjust the difficulty of mining 
+    // if mine rate increases, difficulty is increased and vice versa
     static adjustDiff(prevBlock, currentTimestamp) {
         let { difficulty } = prevBlock;
         difficulty = prevBlock.timestamp + MINE_RATE > currentTimestamp ? 

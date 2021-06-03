@@ -10,16 +10,19 @@ class Wallet {
         this.publicKey = this.keyPair.getPublic().encode('hex');
     }
 
+    // returns string format of a wallet instance
     toString() {
         return `Wallet - 
             public key: ${this.publicKey.toString()}
             balance   : ${this.balance}`;
     }
 
+    // method to sign a dataHash using sign algorithm from elliptic
     sign(dataHash) {
         return this.keyPair.sign(dataHash);
     }
 
+    // method to validate an input and create or update a transaction
     createTransaction(receiver, amount, blockchain, transactionPool) {
         this.balance = this.calculateBalance(blockchain);
 
@@ -40,6 +43,8 @@ class Wallet {
         return transaction;
     }
 
+
+    // method to calculate remaining balance in a wallet instance after making a transaction
     calculateBalance(blockchain) {
         let balance = this.balance;
         let transactions = [];
@@ -77,6 +82,7 @@ class Wallet {
         return balance;
     }
 
+    // BLOCKCHAIN WALLET DECLARATION
     static blockchainWallet() {
         const blockchainWallet = new this();
         blockchainWallet.address = 'blockchain-wallet';

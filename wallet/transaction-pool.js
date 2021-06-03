@@ -1,3 +1,6 @@
+// transaction pool class
+// holds all current unvalidated transaction
+// transaction pool is cleared after validation
 const Transaction = require("./transaction");
 
 class TransactionPool {
@@ -5,6 +8,7 @@ class TransactionPool {
         this.transactions = [];
     }
 
+    // if transaction exists, update, else add new into transactions
     updateOrAddTransaction(transaction) {
         let transactionWithId = this.transactions.find(t => t.id === transaction.id);
         
@@ -15,10 +19,12 @@ class TransactionPool {
         }
     }
 
+    // returns the transactions belonging to address
     existingTransaction(address) {
         return this.transactions.find(t => t.input.address === address);
     }
 
+    // returns valid transaction from transactions
     validTransactions() {
         return this.transactions.filter(transaction => {
             const outputTotal = transaction.outputs.reduce((total, output) => {
@@ -38,6 +44,7 @@ class TransactionPool {
         });
     }
 
+    // method to clear transaction pool
     clear() {
         this.transactions = [];
     }

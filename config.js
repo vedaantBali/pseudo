@@ -1,4 +1,4 @@
-// declaration of initial wallet balance, mine rate in ms, difficulty
+// declaration of initial wallet balance, mine rate in ms, difficulty, mine reward in PC
 const DIFFICULTY = 3;
 const MINE_RATE = 3000;
 const INITIAL_BALANCE = 500;

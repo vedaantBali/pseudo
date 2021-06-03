@@ -11,6 +11,7 @@ class Transaction {
         this.outputs = []; 
     }
 
+    // update a transaction
     update(senderWallet, receiver, amount) {
         const senderOutput = this.outputs.find(output => output.address === senderWallet.publicKey);
 
@@ -26,6 +27,7 @@ class Transaction {
         return this;
     }
 
+    // signs and updates the transactions
     static transactionWithOutputs(senderWallet, outputs) {
         const transaction = new this();
 
@@ -35,6 +37,7 @@ class Transaction {
         return transaction;
     }
 
+    // method to create a new transaction after wallet validation
     static newTransaction(senderWallet, receiver, amount) {
 
         if(amount > senderWallet.balance) {
@@ -48,6 +51,7 @@ class Transaction {
         ]);
     }
 
+    // reward miner with MINE_REWARD with wallet instance of minerWallet.publicKey
     static rewardTransaction(minerWallet, blockchainWallet) {
         return Transaction.transactionWithOutputs(blockchainWallet, [{
             amount: MINE_REWARD,
@@ -55,6 +59,7 @@ class Transaction {
         }]);
     }
 
+    // method to sign a transaction to be added to the transaction variable
     static signTransaction(transaction, senderWallet) {
         transaction.input = {
             timestamp: Date.now(),
@@ -64,6 +69,7 @@ class Transaction {
         }
     }
 
+    // verify transactions
     static verifyTransaction(transaction) {
         return ChainUtil.verifySignature(
             transaction.input.address,
