@@ -22,6 +22,10 @@ const miner = new Miner(blockchain, transactionPool, wallet, p2pServer);
 
 app.use(bodyParser.json());
 
+app.get('/', (req, res) => {
+    res.send('welcome to root end point');
+});
+
 // blocks end point request for the blockchain - are responded with chain
 app.get('/blocks', (req, res) => {
     res.json(blockchain.chain);
